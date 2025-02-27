@@ -3,6 +3,7 @@
     background-color: var(--background-color);
     padding: auto;
     margin: auto;
+    height: 72px;
 }
 
 .header-title {
