@@ -3,7 +3,6 @@
   height: calc(100vh - 72px);
 }
 
-
 .section-header {
   background-color: #2c2d30;
   padding: 15px;
@@ -150,12 +149,17 @@
 
 /* Book Section Styles */
 .book {
-  height: 100%;
+  flex: 1;
   background-color: #2c2d30;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .book-content {
+  flex: 1;
   padding: 20px;
+  overflow-y: auto;
 }
 
 /* Chat List Scrolling */
@@ -172,7 +176,6 @@
 
 /* Book Content Scrolling */
 .book-content {
-  height: calc(100vh - 132px);
   overflow-y: auto;
 }
 
@@ -217,6 +220,7 @@
 
 .chat-container {
   height: 100%;
+  display: flex;
 }
 
 .chat-list,
@@ -235,7 +239,24 @@
   overflow-y: auto;
 }
 
+.user-item.active {
+  background-color: #0084ff;
+}
+
+.user-item.active h3 {
+  color: #fff;
+}
+
 .book-content {
-  height: calc(100vh - 132px);
+  flex: 1;
+  padding: 20px;
   overflow-y: auto;
+  height: calc(100vh - 132px); /* Same as chat-body */
+}
+
+/* Update the iframe styling */
+.book-content iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
 }

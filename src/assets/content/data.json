@@ -1,0 +1,231 @@
+[
+  {
+    "book": "Calculus Early Transcendentals 9e by James Stewart",
+    "date": "05-03-2025",
+    "id": 1,
+    "message_CLOs": [
+      {
+        "content": "CLO1",
+        "role": "AI"
+      },
+      {
+        "content": "edit",
+        "role": "user"
+      },
+      {
+        "content": "CLO2",
+        "role": "AI"
+      }
+    ],
+    "message_CS": [
+      {
+        "content": "CS1",
+        "role": "AI"
+      },
+      {
+        "content": "edit",
+        "role": "user"
+      },
+      {
+        "content": "CS2",
+        "role": "AI"
+      }
+    ],
+    "message_L1": [
+      {
+        "content": "L1",
+        "role": "AI"
+      },
+      {
+        "content": "chat",
+        "role": "user"
+      },
+      {
+        "content": "L1",
+        "role": "AI"
+      }
+    ],
+    "message_L2": [
+      {
+        "content": "L2",
+        "role": "AI"
+      },
+      {
+        "content": "chat",
+        "role": "user"
+      },
+      {
+        "content": "L2",
+        "role": "AI"
+      }
+    ],
+    "message_L3": [
+      {
+        "content": "L3",
+        "role": "AI"
+      },
+      {
+        "content": "chat",
+        "role": "user"
+      },
+      {
+        "content": "L3",
+        "role": "AI"
+      }
+    ],
+    "subject": "Calculus 1"
+  },
+  {
+    "book": "Elementary Differential Equations and Boundary Value Problems Seventh edition by William E. Boyce",
+    "date": "05-02-2025",
+    "id": 2,
+    "message_CLOs": [
+      {
+        "content": "CLO1",
+        "role": "AI"
+      },
+      {
+        "content": "edit",
+        "role": "user"
+      },
+      {
+        "content": "CLO2",
+        "role": "AI"
+      },
+      {
+        "content": "CLO2",
+        "role": "AI"
+      },
+      {
+        "content": "CLO2",
+        "role": "AI"
+      },
+      {
+        "content": "CLO2",
+        "role": "AI"
+      }
+    ],
+    "message_CS": [
+      {
+        "content": "CS1",
+        "role": "AI"
+      },
+      {
+        "content": "edit",
+        "role": "user"
+      },
+      {
+        "content": "CS2",
+        "role": "AI"
+      }
+    ],
+    "message_L1": [
+      {
+        "content": "L1",
+        "role": "AI"
+      },
+      {
+        "content": "chat",
+        "role": "user"
+      },
+      {
+        "content": "L1",
+        "role": "AI"
+      }
+    ],
+    "message_L2": [
+      {
+        "content": "L2",
+        "role": "AI"
+      },
+      {
+        "content": "chat",
+        "role": "user"
+      },
+      {
+        "content": "L2",
+        "role": "AI"
+      }
+    ],
+    "message_L3": [
+      {
+        "content": "L3",
+        "role": "AI"
+      },
+      {
+        "content": "chat",
+        "role": "user"
+      },
+      {
+        "content": "L3",
+        "role": "AI"
+      },
+      {
+        "content": "L3",
+        "role": "AI"
+      },
+      {
+        "content": "L3",
+        "role": "AI"
+      },
+      {
+        "content": "L3",
+        "role": "AI"
+      },
+      {
+        "content": "L3",
+        "role": "AI"
+      },
+      {
+        "content": "L3",
+        "role": "AI"
+      },
+      {
+        "content": "L3",
+        "role": "AI"
+      },
+      {
+        "content": "L3",
+        "role": "AI"
+      },
+      {
+        "content": "L3",
+        "role": "AI"
+      },
+      {
+        "content": "L3",
+        "role": "AI"
+      },
+      {
+        "content": "L3",
+        "role": "AI"
+      },
+      {
+        "content": "L3",
+        "role": "AI"
+      }
+    ],
+    "subject": "Calculus 2 "
+  },
+  {
+    "book": "monopoly.pdf",
+    "date": "05-03-2025",
+    "id": 3,
+    "message_CLOs": [],
+    "subject": "hia"
+  },
+  {
+    "book": "Modern_Operating_Systems_4th_Edition--Andrew_Tanenbaum.pdf",
+    "date": "06-03-2025",
+    "id": 4,
+    "message_CLOs": [],
+    "subject": "hii"
+  },
+  {
+    "book": "HK2_52_He_dieu_hanh.pdf.crdownload.pdf",
+    "date": "06-03-2025",
+    "id": 5,
+    "message_CLOs": [],
+    "subject": "test "
+  }
+]
