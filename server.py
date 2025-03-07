@@ -5,6 +5,8 @@ import os
 from werkzeug.utils import secure_filename
 from datetime import datetime
 import shutil
+from src.utils.pdf_processor import process_pdf
+from src.utils.clo_generator import start_CLO, chat
 
 app = Flask(__name__)
 CORS(app)
@@ -35,6 +37,15 @@ def create_course():
     try:
         file = request.files['file']
         subject = request.form['subject']
+        number_lesson = request.form['numberLesson']
+        duration_lesson = request.form['durationLesson']
+        
+        # Save file temporarily
+        temp_path = os.path.join(UPLOAD_FOLDER, "temp.pdf")
+        file.save(temp_path)
+        
+        # Process PDF
+        pdf_info = process_pdf(temp_path)
         
         # Get current courses and generate new ID
         courses = read_data()
@@ -44,18 +55,31 @@ def create_course():
         course_dir = os.path.join(UPLOAD_FOLDER, str(new_id))
         os.makedirs(course_dir, exist_ok=True)
         
-        # Save the PDF file
-        filename = secure_filename(file.filename)
-        file_path = os.path.join(course_dir, filename)
-        file.save(file_path)
+        # Move PDF to final location
+        final_path = os.path.join(course_dir, secure_filename(file.filename))
+        shutil.move(temp_path, final_path)
         
+        # Generate CLOs
+        initial_clo = start_CLO(
+            messages=[],
+            s=subject,
+            book=f"{pdf_info['book']} by {pdf_info['author']}",
+            tc=pdf_info['content']
+        )
+
         # Create new course data
         new_course = {
             "id": new_id,
             "subject": subject,
             "date": datetime.now().strftime("%d-%m-%Y"),
-            "book": filename,
-            "message_CLOs": [],
+            "book": pdf_info["book"],
+            "author": pdf_info["author"],
+            "content": pdf_info["content"],
+            "number_lesson": int(number_lesson),
+            "duration_lesson": int(duration_lesson),
+            "message_CLOs": [
+                {"role": "AI", "content": initial_clo}
+            ]
         }
         
         # Update JSON file
@@ -83,6 +107,46 @@ def delete_course(course_id):
             shutil.rmtree(course_folder)
         
         return jsonify({"success": True})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    
+@app.route('/chat-clo', methods=['POST'])
+def chat_clo():
+    try:
+        data = request.json
+        course_id = data['courseId']
+        user_message = data['message']
+        
+        # Đọc dữ liệu hiện tại
+        courses = read_data()
+        course = next((c for c in courses if c['id'] == course_id), None)
+        
+        if not course:
+            return jsonify({"error": "Course not found"}), 404
+            
+        # Lấy lịch sử chat
+        messages = [
+            {"role": m["role"], "content": m["content"]} 
+            for m in course["message_CLOs"]
+        ]
+        
+        # Gọi hàm chat
+        response = chat(messages, user_message)
+        
+        # Cập nhật lịch sử chat
+        course["message_CLOs"].extend([
+            {"role": "User", "content": user_message},
+            {"role": "AI", "content": response}
+        ])
+        
+        # Lưu dữ liệu
+        write_data(courses)
+        
+        return jsonify({
+            "success": True,
+            "message": response
+        })
+        
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

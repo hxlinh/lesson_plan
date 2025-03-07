@@ -23,7 +23,38 @@ const ChatPage = () => {
   const [selectedMessages, setSelectedMessages] = useState([]);
   const [selectedTitle, setSelectedTitle] = useState("");
   const [pdfPath, setPdfPath] = useState(""); 
+  const [inputMessage, setInputMessage] = useState('');
 
+  const handleSendMessage = async () => {
+    if (!inputMessage.trim()) return;
+  
+    try {
+      const response = await fetch('http://localhost:5000/chat-clo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          courseId: parseInt(id),
+          message: inputMessage
+        })
+      });
+  
+      const data = await response.json();
+      if (data.success) {
+        // Cập nhật state messages
+        setSelectedMessages([
+          ...selectedMessages,
+          { role: 'User', content: inputMessage },
+          { role: 'AI', content: data.message }
+        ]);
+        setInputMessage(''); // Clear input
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+    }
+  };
+  
   useEffect(() => {
     fetch("http://localhost:5000/courses")
       .then((response) => response.json())
@@ -133,8 +164,14 @@ const ChatPage = () => {
           )}
           </div>
           <div className="message-input">
-            <input type="text" placeholder="Nhập tin nhắn..." />
-            <button className="send-button">
+            <input 
+              type="text" 
+              value={inputMessage}
+              onChange={(e) => setInputMessage(e.target.value)}
+              placeholder="Nhập tin nhắn..." 
+              onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+            />
+            <button className="send-button" onClick={handleSendMessage}>
               <span>Gửi</span>
             </button>
           </div>
